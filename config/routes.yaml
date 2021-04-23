@@ -1,0 +1,5 @@
+index:
+    path: /{wildcard}
+    controller: App\Controller\BaseController::index
+    requirements:
+        wildcard: .*

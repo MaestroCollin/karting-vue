@@ -1,0 +1,39 @@
+{% extends 'bezoeker.html.twig' %}
+
+{% block menu %}
+
+<li><a href="#">contact</a></li>
+{% endblock %}
+
+{% block content %}
+{% if error %}
+<div class="alert alert-warning">
+    {{ error.messageKey|trans(error.messageData, 'security') }}
+</div>
+{% endif %}
+
+
+<form method="post">
+    {% if error %}
+    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+    <div class="mb-3">
+        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+    </div>
+    {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Inloggen</h1>
+    <label for="inputUsername">Inlognaam:</label>
+    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required
+        autofocus>
+    <label for="inputPassword">Wachtwoord:</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <button class="btn btn-lg btn-primary" type="submit">
+        Login
+    </button>
+</form>
+{% endblock %}

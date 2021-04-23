@@ -1,0 +1,82 @@
+{% extends 'medewerker.html.twig' %}
+
+{% block menu %}
+<li><a href="{{ path('activiteitenoverzicht') }}">home</a></li>
+<li><a href="{{ path('beheer') }}"><span class="badge">{{ users|length }}</span>beheer</a></li>
+{% endblock %}
+{% block content %}
+<section>
+    <table class="table" style="table-layout: fixed">
+        <caption>Dit zijn alle users van het kartcentrum</caption>
+        <thead>
+            <tr>
+                <td>Username</td>
+                <td>Email</td>
+                <td>Voorleters</td>
+                <td>Tussenvoegsel</td>
+                <td>Achternaam</td>
+                <td>Adres</td>
+                <td>Postcode</td>
+                <td>Woonplaats</td>
+                <td>Telefoon</td>
+                <td>wachtwoord Resetten</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>
+                    {{user.username}}
+                </td>
+                <td>
+                    {{user.email}}
+                </td>
+                <td>
+                    {{user.voorletters}}
+                </td>
+                <td>
+                    {{user.tussenvoegsel}}
+                </td>
+                <td>
+                    {{user.achternaam}}
+                </td>
+                <td>
+                    {{user.adres}}
+                </td>
+                <td>
+                    {{user.postcode}}
+                </td>
+                <td>
+                    {{user.woonplaats}}
+                </td>
+                <td>
+                    {{user.telefoon}}
+                </td>
+                <td><a href="{{ path('userPasswordReset', {'user':user.id}) }}">
+                        <span class="glyphicon glyphicon-pencil" style="color:red"></span>
+                    </a></td>
+                <td>
+                    <a href="{{ path('userDelete', {'id':user.id}) }}">
+                        <span class="glyphicon glyphicon-trash" style="color:red"></span>
+                    </a>
+                </td>
+
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="6">
+                    <a href="{{ path('addActiviteit') }}">
+                        <span class="glyphicon glyphicon-plus" style="color:red"></span>
+                    </a>
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'medewerker.html.twig' %}
+
+{% block menu %}
+<li><a href="{{ path('activiteitenoverzicht') }}">home</a></li>
+<li class="active"><a href="{{ path('beheer') }}"><span class="badge">{{ activiteiten|length }}</span>beheer</a></li>
+{% endblock %}
+{% block content %}
+<section>
+    <table class="table" style="table-layout: fixed">
+        <caption>Dit zijn alle activiteiten van het kartcentrum</caption>
+        <thead>
+            <tr>
+                <td>Naam</td>
+                <td>Minimale leeftijd</td>
+                <td>Tijdsduur (min)</td>
+                <td>Prijs</td>
+                <td>Max deelnemers</td>
+                <td>Bewerken</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for activiteit in activiteiten %}
+            <tr>
+                <td>
+                    {{ activiteit.naam}}
+                </td>
+                <td>
+                    {{ activiteit.minLeeftijd}}
+                </td>
+
+                <td>
+                    {{ activiteit.tijdsduur}}
+                </td>
+                <td>
+                    {{ activiteit.prijs}}
+                </td>
+                <td>
+                    {{activiteit.maxDeelnemers}}
+                </td>
+                <td>
+                    <a href="{{ path('updateSoortActiviteit', {'id':activiteit.id}) }}">
+                        <span class="glyphicon glyphicon-pencil" style="color:red"></span>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="6">
+                    <a href="{{ path('addActiviteit') }}">
+                        <span class="glyphicon glyphicon-plus" style="color:red"></span>
+                    </a>
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+</section>
+
+{% endblock %}
